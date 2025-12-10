@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تبریک روز خاله</title>
+    <title>تبریک فوق فانتزی روز خاله</title>
     <style>
         /* CSS برای طراحی و افکت‌ها */
         body {
@@ -13,58 +13,58 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* پس‌زمینه فانتزی */
+            background: radial-gradient(circle at center, #fff0f5 0%, #ffe4e1 50%, #e6e6fa 100%); /* پس‌زمینه لطیف‌تر */
             font-family: 'Tahoma', sans-serif;
             overflow: hidden;
+            position: relative;
         }
 
         /* دکمه فانتزی */
         #fancyButton {
-            padding: 15px 30px;
-            font-size: 1.5em;
+            padding: 20px 40px; /* بزرگ‌تر */
+            font-size: 1.8em;
             cursor: pointer;
             border: none;
-            border-radius: 50px; /* شکل گرد */
-            background: linear-gradient(45deg, #ff69b4, #ffb6c1); /* گرادیانت صورتی جذاب */
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1); /* گرادیانت پررنگ‌تر */
             color: white;
-            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4), 0 0 40px rgba(255, 105, 180, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.6), 0 0 50px rgba(255, 20, 147, 0.4);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
-            z-index: 2;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
         }
 
         #fancyButton:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.6), 0 0 60px rgba(255, 105, 180, 0.4);
-        }
-
-        #fancyButton:active {
-            transform: translateY(1px);
+            transform: scale(1.1); /* بزرگ شدن بیشتر هنگام مکث موس */
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.8), 0 0 80px rgba(255, 20, 147, 0.6);
         }
 
         /* استایل متن تبریک */
         #messageContainer {
             margin-top: 50px;
-            font-size: 2.2em;
+            font-size: 3em; /* بزرگ‌تر */
             text-align: center;
+            color: #4b0082;
             opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.1);
             position: relative;
+            z-index: 3;
+            /* این قسمت انیمیشن اصلی در جاوااسکریپت کنترل می‌شود */
         }
 
-        /* افکت طلایی برای "خاله" */
+        /* افکت طلایی برای "خاله" - Shimmering Gold */
         .golden {
-            font-weight: bold;
+            font-weight: 900;
             display: inline-block;
-            /* افکت گرادیانت طلایی */
-            background: linear-gradient(120deg, #ffd700, #daa520, #ffec8b, #daa520);
+            background: linear-gradient(120deg, #ffd700, #ffec8b, #daa520, #ffd700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 300% 300%;
-            animation: shimmer 5s infinite linear; /* افکت لرزش/درخشش */
-            margin-left: 5px; /* کمی فاصله از "جون" */
+            animation: shimmer 4s infinite ease-in-out; 
+            margin-left: 10px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* درخشش بیشتر */
         }
 
         @keyframes shimmer {
@@ -73,38 +73,47 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* متن امضا در پایین صفحه */
+        /* افکت لرزش/تکان خوردن (Jiggle/Shake) هنگام ظاهر شدن */
+        @keyframes jiggle {
+            0%, 100% { transform: scale(1.2) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-1deg); }
+            75% { transform: scale(1.2) rotate(1deg); }
+        }
+
+        .jiggle-animation {
+            animation: jiggle 0.5s ease-in-out 0s 4 alternate; /* 4 بار لرزش */
+        }
+
+        /* متن امضا در پایین صفحه - با افکت Fade-in */
         #signature {
             position: absolute;
             bottom: 30px;
-            font-size: 1.2em;
-            color: #4b0082; /* رنگ بنفش */
+            font-size: 1.4em;
+            color: #8a2be2;
             font-style: italic;
             opacity: 0;
-            transition: opacity 1s ease 1s; /* با تاخیر ظاهر شود */
+            transition: opacity 1.5s ease 1.5s; /* با تاخیر بیشتری ظاهر شود */
         }
 
-        /* افکت ذرات برای فانتزی بودن */
-        .particle {
+        /* افکت برف شادی (Confetti) */
+        .confetti {
             position: absolute;
-            background: radial-gradient(circle, #ffe4e1 0%, transparent 70%);
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            pointer-events: none;
-            animation: float 5s infinite ease-out;
             opacity: 0;
-            z-index: 1;
+            z-index: 10;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0); opacity: 0; }
-            50% { transform: translateY(-50px) rotate(180deg); opacity: 0.8; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0.5; }
         }
     </style>
 </head>
 <body>
 
-    <button id="fancyButton">✨ تبریک! ✨</button>
+    <button id="fancyButton">✨ روی من کلیک کن! ✨</button>
 
     <div id="messageContainer">
         <span class="golden">خاله</span>
@@ -114,58 +123,81 @@
     <div id="signature">از طرف عرفان</div>
 
     <script>
-        // JavaScript برای اضافه کردن تعامل
         const button = document.getElementById('fancyButton');
         const messageContainer = document.getElementById('messageContainer');
         const signature = document.getElementById('signature');
         const body = document.body;
 
         button.addEventListener('click', () => {
-            // 1. نمایش پیام با افکت فانتزی (مقیاس و Opacity)
+            // 1. نمایش پیام با افکت زوم فانتزی
+            messageContainer.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // افکت فنری
             messageContainer.style.opacity = '1';
-            messageContainer.style.transform = 'scale(1)';
+            messageContainer.style.transform = 'scale(1.2)'; // ابتدا کمی بزرگتر شود
 
-            // 2. پنهان کردن دکمه
+            // 2. اضافه کردن افکت لرزش/تکان خوردن
+            setTimeout(() => {
+                messageContainer.classList.add('jiggle-animation');
+                // بعد از اتمام لرزش، آن را به اندازه نهایی برگردان
+                setTimeout(() => {
+                    messageContainer.classList.remove('jiggle-animation');
+                    messageContainer.style.transform = 'scale(1)';
+                }, 2500); // 4 بار لرزش * 0.5 ثانیه + کمی زمان
+            }, 800);
+
+            // 3. پنهان کردن دکمه
             button.style.opacity = '0';
             button.style.pointerEvents = 'none';
+            button.style.transform = 'scale(0.5)'; // با افکت کوچک شدن ناپدید شود
 
-            // 3. نمایش امضا
+            // 4. نمایش امضا
             signature.style.opacity = '1';
 
-            // 4. ایجاد افکت ذرات فانتزی
-            for (let i = 0; i < 20; i++) {
-                createParticle(event.clientX, event.clientY);
-            }
+            // 5. اجرای افکت برف شادی (Confetti)
+            launchConfetti();
         });
 
-        function createParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
+        function launchConfetti() {
+            const colors = ['#ff69b4', '#ffd700', '#00ced1', '#ff1493', '#9370db', '#f08080'];
+            const startX = button.offsetLeft + button.offsetWidth / 2;
+            const startY = button.offsetTop + button.offsetHeight / 2;
 
-            // ابعاد و موقعیت اولیه
-            const size = Math.random() * 15 + 5; // اندازه بین 5 تا 20 پیکسل
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            // موقعیت اولیه نزدیک دکمه
-            particle.style.left = `${button.offsetLeft + button.offsetWidth / 2 + (Math.random() - 0.5) * 50}px`;
-            particle.style.top = `${button.offsetTop + button.offsetHeight / 2 + (Math.random() - 0.5) * 50}px`;
+            for (let i = 0; i < 70; i++) { // تعداد بیشتر
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // انتخاب رنگ و اندازه تصادفی
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 8 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.borderRadius = (Math.random() > 0.5) ? '50%' : '2px'; // شکل دایره یا مربع
+                
+                // موقعیت شروع از مرکز دکمه
+                confetti.style.left = `${startX + (Math.random() - 0.5) * 50}px`;
+                confetti.style.top = `${startY + (Math.random() - 0.5) * 50}px`;
 
-            // تغییر سرعت و مسیر حرکت
-            const duration = Math.random() * 3 + 2; // زمان انیمیشن بین 2 تا 5 ثانیه
-            const delay = Math.random() * 0.5; // تاخیر
-            
-            particle.style.animation = `float ${duration}s infinite ease-out`;
-            particle.style.animationDelay = `-${delay}s`;
+                // تعریف انیمیشن fall
+                const duration = Math.random() * 3 + 4; // زمان بین 4 تا 7 ثانیه
+                const delay = Math.random() * 2;
+                
+                confetti.style.animation = `fall ${duration}s ease-in forwards`; // forwards باعث می‌شود در وضعیت نهایی بماند
+                confetti.style.animationDelay = `${delay}s`;
+                
+                // پرتاب با زاویه تصادفی
+                const angle = Math.random() * 360;
+                const distance = Math.random() * 300 + 100;
+                const endX = startX + distance * Math.cos(angle * Math.PI / 180);
+                const endY = startY - distance * Math.sin(angle * Math.PI / 180); // پرتاب به سمت بالا
 
-            body.appendChild(particle);
+                confetti.style.setProperty('--end-x', `${endX}px`);
+                confetti.style.setProperty('--end-y', `${endY}px`);
 
-            // حذف ذرات بعد از اتمام انیمیشن
-            setTimeout(() => {
-                particle.remove();
-            }, duration * 1000 + 500); 
+                body.appendChild(confetti);
+
+                // حذف بعد از اتمام
+                setTimeout(() => confetti.remove(), (duration + delay) * 1000 + 100);
+            }
         }
-
     </script>
 </body>
 </html>
